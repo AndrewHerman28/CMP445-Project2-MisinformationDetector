@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misinformation Detector</title>
+
+    <!== Loading Spinner CSS -->
+    <style>
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+<h1>Misinformation Detector</h1>
+
+<form method="POST" onsubmit="showSpinner()">
+    <input
+            type="text"
+            name="url"
+            placeholder="Enter a news article URL"
+            style="width: 350px; padding: 5px;"
+            required
+    >
+    <button type="submit">Analyze</button>
+</form>
+
+<!-- Loading Spinner -->
+<div id="spinner" style="display:none; margin-top:20px; text-align:center;">
+    <div class="loader"></div>
+    <p>Scraping article…</p>
+</div>
+
+<hr>
+
+{% if result %}
+{% if result.success %}
+<h2>Scraped Data</h2>
+
+<p><strong>URL:</strong> {{ result.url }}</p>
+<p><strong>Domain:</strong> {{ result.domain }}</p>
+<p><strong>Title:</strong> {{ result.title }}</p>
+<p><strong>Authors:</strong> {{ result.authors }}</p>
+<p><strong>Publish Date:</strong> {{ result.publish_date }}</p>
+
+<h3>Article Text</h3>
+<p>{{ result.text }}</p>
+
+{% else %}
+<h2 style="color:red;">Error</h2>
+<p>{{ result.error }}</p>
+{% endif %}
+{% endif %}
+
+<!-- Loading Spinner -->
+<script>
+    function showSpinner() {
+        document.getElementById("spinner").style.display = "block";
+    }
+</script>
+
+</body>
+</html>
