@@ -5,49 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Misinformation Detector</title>
 
-    <!== Loading Spinner CSS -->
-    <style>
-        .loader {
-            border: 8px solid #f3f3f3;
-            border-top: 8px solid #3498db;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-
+    <!-- Load CSS and JS  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
-<body>
 
+<body>
 <h1>Misinformation Detector</h1>
 
 <form method="POST" onsubmit="showSpinner()">
-    <input
-            type="text"
-            name="url"
-            placeholder="Enter a news article URL"
-            style="width: 350px; padding: 5px;"
-            required
-    >
+    <input type="text" name="url" placeholder="Enter news article URL" required>
     <button type="submit">Analyze</button>
 </form>
 
-<!-- Loading Spinner -->
+<!-- Spinner -->
 <div id="spinner" style="display:none; margin-top:20px; text-align:center;">
     <div class="loader"></div>
     <p>Scraping article…</p>
 </div>
+
 
 <hr>
 
@@ -64,18 +40,29 @@
 <h3>Article Text</h3>
 <p>{{ result.text }}</p>
 
+{% if prediction %}
+<h2>Prediction</h2>
+
+{% if prediction.prediction == 1 %}
+<p style="color:red; font-weight:bold;">
+    ❌ Likely Misinformation
+    ({{ (prediction.probability_misinfo * 100) | round(2) }}% confidence)
+</p>
+{% else %}
+<p style="color:green; font-weight:bold;">
+    ✔ Likely Credible
+    ({{ (prediction.probability_real * 100) | round(2) }}% confidence)
+</p>
+{% endif %}
+{% endif %}
+
+
 {% else %}
 <h2 style="color:red;">Error</h2>
 <p>{{ result.error }}</p>
 {% endif %}
 {% endif %}
 
-<!-- Loading Spinner -->
-<script>
-    function showSpinner() {
-        document.getElementById("spinner").style.display = "block";
-    }
-</script>
 
 </body>
 </html>

@@ -4,6 +4,7 @@ from App.main import app
 from App.scraper import scrape_url
 from App.predictor import predict_text
 
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
