@@ -17,7 +17,7 @@ Link to Web App - https://misinfo-detector-production.up.railway.app/
 - Libraries: pandas, sklearn, joblib, flask, nltk, re, newspaper, urllib
 
 
-## Intall Code
+## Install Code
 - git clone https://github.com/AndrewHerman28/CMP445-Project2-MisinformationDetector.git
 
 - cd projectname
@@ -26,7 +26,11 @@ Link to Web App - https://misinfo-detector-production.up.railway.app/
 
 
 ## How to Use
-- You can download the merged data directly. If you only have 3 raw data files, run "merge_data.py" to build a clean merged csv.
+- You can download the merged data directly or,
+  - Raw data can be found on Kaggle
+    - https://www.kaggle.com/datasets/doanquanvietnamca/liar-dataset
+    - https://www.kaggle.com/datasets/emineyetm/fake-news-detection-datasets
+  - Run "merge_data.py" to build a clean merged csv file
 
 - Run "Predictor.py" once to build the machine learning model and save it as a pickle file in the Models directory.
 
