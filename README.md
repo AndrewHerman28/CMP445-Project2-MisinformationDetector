@@ -18,7 +18,7 @@ Link to Web App - https://misinfo-detector-production.up.railway.app/
 
 
 ## Intall Code
-- git clone -----
+- git clone https://github.com/AndrewHerman28/CMP445-Project2-MisinformationDetector.git
 
 - cd projectname
 
